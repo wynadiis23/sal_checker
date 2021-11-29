@@ -23,13 +23,13 @@ else:
 t_token = ch.read_config_file('t_notif','t_token')
 t_ch_id = ch.read_config_file('t_notif','t_ch_id')
 
-check_stat = ch.main()
+check_stat, naik_ps = ch.main()
 a = (json.dumps(check_stat, indent = 2))
 
-check_stat_dep = ch_dep.main()
+check_stat_dep, naik_dep = ch_dep.main()
 b = (json.dumps(check_stat_dep, indent = 2))
 
-check_stat_alz = ch_alz.main()
+check_stat_alz, naik_alz = ch_alz.main()
 c = (json.dumps(check_stat_alz, indent = 2))
 
 message = f"""selamat sore
@@ -44,10 +44,21 @@ DEPSTORE | belum naik:
 ALZ | belum naik: 
 {c}"""
 
-print(message)
+naik_file_msg = f"""data yang naik
+
+PS:
+{(json.dumps(naik_ps, indent = 2))}
+
+DEPSTORE:
+{(json.dumps(naik_dep, indent = 2))}
+
+ALZ: 
+{(json.dumps(naik_alz, indent = 2))}"""
+
 t_status = ch.read_config_file('t_notif', 'v')
 if (bool(t_status)):
-	tn.notify_ending(application_path, message, t_token, t_ch_id)
+    tn.notify_ending(application_path, message, t_token, t_ch_id)
+    tn.notify_ending(application_path, naik_file_msg, t_token, t_ch_id)
 
 """
 selamat sore

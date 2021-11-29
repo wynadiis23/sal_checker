@@ -152,12 +152,12 @@ def find_files():
 	d = dict()
 	if len(naik) == toko_count:
 		d['status'] = 'ps naik semua'
-		return d
+		return d, naik
 	elif len(naik) < toko_count:
 		d['belum_naik'] = belum_naik
 		d['file_tidak_ada'] = file_tidak_ada
 		d['folder_tidak_ada'] = folder_tidak_ada
-		return d
+		return d, naik
 	else:
 		return 'ama'
 	# return toko_count
