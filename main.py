@@ -6,6 +6,7 @@ import t_notif as tn
 import json
 import configparser
 import sys, os
+from datetime import datetime
 
 
 if getattr(sys, 'frozen', False):
@@ -23,6 +24,9 @@ else:
 t_token = ch.read_config_file('t_notif','t_token')
 t_ch_id = ch.read_config_file('t_notif','t_ch_id')
 
+now = datetime.now()
+current_time = now.strftime("%H:%M:%S")
+
 check_stat, naik_ps = ch.main()
 a = (json.dumps(check_stat, indent = 2))
 
@@ -32,8 +36,9 @@ b = (json.dumps(check_stat_dep, indent = 2))
 check_stat_alz, naik_alz = ch_alz.main()
 c = (json.dumps(check_stat_alz, indent = 2))
 
-message = f"""selamat sore
-berikut report data sales toko
+message = f"""Selamat sore
+Berikut report Data Sales Toko
+{current_time}
 
 PS | belum naik:
 {a}
@@ -44,7 +49,7 @@ DEPSTORE | belum naik:
 ALZ | belum naik: 
 {c}"""
 
-naik_file_msg = f"""data yang naik
+naik_file_msg = f"""Data Sales yg Sudah Naik
 
 PS:
 {(json.dumps(naik_ps, indent = 2))}

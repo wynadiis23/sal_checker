@@ -114,7 +114,7 @@ def find_files():
 					#check data kemarin ada tidak
 					fullPath = direktori + "\\" + namaFile_kemarin
 					if os.path.isfile(fullPath):
-						str_2 = ("%s not found | data kemarin: %s" % (namaFile_kemarin, time.ctime(os.path.getmtime(full_file_path_kemarin))))
+						str_2 = ("%s not found | %s data kemarin: %s" % (namaFile, namaFile_kemarin, time.ctime(os.path.getmtime(full_file_path_kemarin))))
 						file_tidak_ada.append(str_2)
 					else:
 						str_2 = (namaFile + ' not found')
