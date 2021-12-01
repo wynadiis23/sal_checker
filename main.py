@@ -59,11 +59,28 @@ DEPSTORE:
 
 ALZ: 
 {(json.dumps(naik_alz, indent = 2))}"""
+print(len(message))
+print(len(naik_file_msg))
 
 t_status = ch.read_config_file('t_notif', 'v')
 if (bool(t_status)):
-    tn.notify_ending(application_path, message, t_token, t_ch_id)
-    tn.notify_ending(application_path, naik_file_msg, t_token, t_ch_id)
+    if(len(message) > 4096):
+        message01 = message[:len(message)//2]
+        message02 = message[len(message)//2:]
+
+        tn.notify_ending(application_path, message01, t_token, t_ch_id)
+        tn.notify_ending(application_path, message02, t_token, t_ch_id)
+    else:
+        tn.notify_ending(application_path, message, t_token, t_ch_id)
+
+    if(len(naik_file_msg) > 4096):
+        naik_file_msg01 = naik_file_msg[:len(naik_file_msg)//2]
+        naik_file_msg02 = naik_file_msg[len(naik_file_msg)//2:]
+
+        tn.notify_ending(application_path, naik_file_msg01, t_token, t_ch_id)
+        tn.notify_ending(application_path, naik_file_msg02, t_token, t_ch_id)
+    else:
+        tn.notify_ending(application_path, naik_file_msg, t_token, t_ch_id)
 
 """
 selamat sore
