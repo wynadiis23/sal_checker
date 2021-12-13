@@ -37,7 +37,7 @@ def find_files():
 	if env == 'dev':
 		rootDir = 'D:\Development\DATAHEAD'
 	if env == 'prod':
-		rootDir = read_config_file('user_info', 'dir_ps')	
+		rootDir = read_config_file('user_info', 'dir_xsale')	
 	
 	naik = []
 	belum_naik = []
@@ -45,7 +45,7 @@ def find_files():
 	folder_tidak_ada = []
 	belum_naik_copy = []
 	toko_count = 0
-	with open("daftarToko.txt", "r") as a_file:
+	with open("daftarxsale.txt", "r") as a_file:
 		print("this code is managed and updated by: https://github.com/wynadiis23")
 		now = datetime.now()
 		current_time = now.strftime("%H:%M:%S")
@@ -151,7 +151,7 @@ def find_files():
 
 	d = dict()
 	if len(naik) == toko_count:
-		d['status'] = 'ps naik semua'
+		d['status'] = 'xsale naik semua'
 		return d, naik
 	elif len(naik) < toko_count:
 		d['belum_naik'] = belum_naik
@@ -178,10 +178,6 @@ def read_config_file(section, item):
         t_info = config[section]
         t_info_conf = t_info[item]
         return t_info_conf
-    elif (section == 'x_sale_opt'):
-     	xsale_info = config[section]
-     	xsale_info_conf = xsale_info[item]
-     	return xsale_info_conf
     else:
         log_txt = "no such section and item on config file"
         exit()

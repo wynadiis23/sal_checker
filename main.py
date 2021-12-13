@@ -8,7 +8,6 @@ import configparser
 import sys, os
 from datetime import datetime
 
-
 if getattr(sys, 'frozen', False):
     # If the application is run as a bundle, the PyInstaller bootloader
     # extends the sys module by a flag frozen=True and sets the app 
@@ -19,6 +18,17 @@ if getattr(sys, 'frozen', False):
 else:
     print('run as py script')
     application_path = os.path.dirname(os.path.abspath(__file__))
+
+x_sale = ch.read_config_file('x_sale_opt','v')
+print(x_sale)
+if (bool(x_sale)):
+    import check_xsale as ch_xsale
+    check_stat_xsale, naik_xsale = ch_xsale.main()
+    x = (json.dumps(check_stat_xsale, indent = 2))
+    x_sale_datanaik = (json.dumps(naik_xsale, indent = 2))
+else:
+    x = "xsale opt is not true"
+    x_sale_datanaik = "xsale opt is not true"
 
 
 t_token = ch.read_config_file('t_notif','t_token')
@@ -35,6 +45,7 @@ b = (json.dumps(check_stat_dep, indent = 2))
 
 check_stat_alz, naik_alz = ch_alz.main()
 c = (json.dumps(check_stat_alz, indent = 2))
+c2 = (json.dumps(naik_alz, indent = 2))
 
 message = f"""Selamat sore
 Berikut report Data Sales Toko
@@ -46,8 +57,12 @@ PS | belum naik:
 DEPSTORE | belum naik:
 {b}
 
-ALZ | belum naik: 
-{c}"""
+ALZ | yang sudah naik: 
+{c2}
+
+XSALE | belum naik: 
+{x}
+"""
 
 naik_file_msg = f"""Data Sales yg Sudah Naik
 
@@ -57,8 +72,14 @@ PS:
 DEPSTORE:
 {(json.dumps(naik_dep, indent = 2))}
 
-ALZ: 
-{(json.dumps(naik_alz, indent = 2))}"""
+ALZ: yang belum naik
+{c}
+
+XSALE:
+{x_sale_datanaik} 
+"""
+
+
 print(len(message))
 print(len(naik_file_msg))
 
