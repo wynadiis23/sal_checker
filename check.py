@@ -127,7 +127,7 @@ def find_files():
 						# get file size kemarin
 						get_file_size = os.path.getsize(full_file_path_kemarin)
 						converted_fz = hp.convert_bytes(get_file_size)
-						
+
 						str_2 = ("%s not found | %s data kemarin: %s %s" % (namaFile, namaFile_kemarin, time.ctime(os.path.getmtime(full_file_path_kemarin)), converted_fz))
 						file_tidak_ada.append(str_2)
 					else:
@@ -190,9 +190,9 @@ def read_config_file(section, item):
         t_info_conf = t_info[item]
         return t_info_conf
     elif (section == 'x_sale_opt'):
-     	xsale_info = config[section]
-     	xsale_info_conf = xsale_info[item]
-     	return xsale_info_conf
+        xsale_info = config[section]
+        xsale_info_conf = xsale_info[item]
+        return xsale_info_conf
     else:
         log_txt = "no such section and item on config file"
         exit()
