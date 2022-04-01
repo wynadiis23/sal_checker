@@ -98,9 +98,12 @@ def find_files():
 
 			if check_dir_exist:
 				fullPath = direktori + "\\" + namaFile
-				get_file_size = os.path.getsize(full_file_path)
-				converted_fz = hp.convert_bytes(get_file_size)
+				
 				if os.path.isfile(fullPath):
+					# check file size
+					get_file_size = os.path.getsize(full_file_path)
+					converted_fz = hp.convert_bytes(get_file_size)
+
 					time_temp1 = time.ctime(os.path.getmtime(full_file_path))
 					time_temp2 = time.strptime(time_temp1)
 					modified_time_file = time.strftime('%H:%M:%S', (time_temp2))
@@ -118,9 +121,13 @@ def find_files():
 					# print(naik);
 				else:
 					#check data kemarin ada tidak
-					fullPath = direktori + "\\" + 
-					converted_fz = hp.convert_bytes(full_file_path_kemarin)
+					fullPath = direktori + "\\" + namaFile_kemarin
+					
 					if os.path.isfile(fullPath):
+						# get file size kemarin
+						get_file_size = os.path.getsize(full_file_path_kemarin)
+						converted_fz = hp.convert_bytes(get_file_size)
+						
 						str_2 = ("%s not found | %s data kemarin: %s %s" % (namaFile, namaFile_kemarin, time.ctime(os.path.getmtime(full_file_path_kemarin)), converted_fz))
 						file_tidak_ada.append(str_2)
 					else:
