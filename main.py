@@ -1,6 +1,8 @@
+from distutils.util import split_quoted
 import check as ch
 import check_alz as ch_alz
 import check_dep as ch_dep
+import helper as hp
 # import check_kemarin as ch_kmrn
 import t_notif as tn
 import json
@@ -85,23 +87,31 @@ print(len(naik_file_msg))
 
 t_status = ch.read_config_file('t_notif', 'v')
 if (bool(t_status)):
-    if(len(message) > 4096):
-        message01 = message[:len(message)//2]
-        message02 = message[len(message)//2:]
+    # if(len(message) > 4096):
+    #     message01 = message[:len(message)//2]
+    #     message02 = message[len(message)//2:]
 
-        tn.notify_ending(application_path, message01, t_token, t_ch_id)
-        tn.notify_ending(application_path, message02, t_token, t_ch_id)
-    else:
-        tn.notify_ending(application_path, message, t_token, t_ch_id)
+    #     tn.notify_ending(application_path, message01, t_token, t_ch_id)
+    #     tn.notify_ending(application_path, message02, t_token, t_ch_id)
+    # else:
+    #     tn.notify_ending(application_path, message, t_token, t_ch_id)
 
-    if(len(naik_file_msg) > 4096):
-        naik_file_msg01 = naik_file_msg[:len(naik_file_msg)//2]
-        naik_file_msg02 = naik_file_msg[len(naik_file_msg)//2:]
+    # if(len(naik_file_msg) > 4096):
+    #     naik_file_msg01 = naik_file_msg[:len(naik_file_msg)//2]
+    #     naik_file_msg02 = naik_file_msg[len(naik_file_msg)//2:]
 
-        tn.notify_ending(application_path, naik_file_msg01, t_token, t_ch_id)
-        tn.notify_ending(application_path, naik_file_msg02, t_token, t_ch_id)
-    else:
-        tn.notify_ending(application_path, naik_file_msg, t_token, t_ch_id)
+    #     tn.notify_ending(application_path, naik_file_msg01, t_token, t_ch_id)
+    #     tn.notify_ending(application_path, naik_file_msg02, t_token, t_ch_id)
+    # else:
+    #     tn.notify_ending(application_path, naik_file_msg, t_token, t_ch_id)
+    splitted_msg = hp.devide_message(message, 4096)
+    for msg in splitted_msg:
+        tn.notify_ending(application_path, msg, t_token, t_ch_id)
+
+    splitted_msg_naik = hp.devide_message(naik_file_msg, 4096)
+    for msg in splitted_msg_naik:
+        tn.notify_ending(application_path, msg, t_token, t_ch_id)
+
 
 """
 selamat sore
