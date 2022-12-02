@@ -1,6 +1,7 @@
-import telegram
+#import telegram
 import configparser
 import os
+import requests
 
 
 def notify_ending(application_path, message, token, t_ch_id):
@@ -10,6 +11,9 @@ def notify_ending(application_path, message, token, t_ch_id):
     # t_info = config['t_notif']
     token = token
     chat_id = t_ch_id    
-    bot = telegram.Bot(token=token)
+    #bot = telegram.Bot(token=token)
+    url = f"https://api.telegram.org/bot{token}/sendMessage?chat_id={t_ch_id}&text={message}"
+    #a = bot.sendMessage(chat_id=chat_id, text=message)
+    requests.get(url).json() # this sends the message
     
-    a = bot.sendMessage(chat_id=chat_id, text=message)
+    #a = bot.sendMessage(chat_id=chat_id, text=message)
